@@ -60,6 +60,36 @@ El proyecto utiliza una estructura SCSS organizada por tipo de archivo:
 
 Para más detalles, ver `scss/README.md` y `scss/MAINTENANCE.md`
 
+## 🤖 Automatización de Git
+
+El proyecto incluye un sistema de automatización para subir cambios a GitHub automáticamente:
+
+### Comandos Disponibles
+
+```bash
+# Commit automático con mensaje generado
+npm run git:commit
+
+# Commit con mensaje personalizado
+npm run git:commit:message "Tu mensaje aquí"
+
+# Modo de monitoreo (commits automáticos cada 60s)
+npm run git:commit:watch
+
+# Despliegue rápido
+npm run deploy
+```
+
+### Características
+
+- ✅ Detección automática de cambios
+- ✅ Mensajes de commit inteligentes
+- ✅ Clasificación por tipo de archivo
+- ✅ Configuración automática de git
+- ✅ Modo de monitoreo continuo
+
+Para más detalles, ver `GIT_AUTOMATION.md`
+
 ## ♿ Accesibilidad (WCAG 2.1 AA)
 
 El sitio cumple con los estándares de accesibilidad WCAG 2.1 Nivel AA:

@@ -5,7 +5,11 @@
   "scripts": {
     "start": "http-server . -p 8080 -o",
     "dev": "http-server . -p 8080 -o",
-    "test": "echo \"test\" && exit 1"
+    "test": "echo \"test\" && exit 1",
+    "git:commit": "node git-automation.js",
+    "git:commit:watch": "node git-automation.js --watch",
+    "git:commit:message": "node git-automation.js --message",
+    "deploy": "npm run git:commit && echo \"✅ Cambios desplegados exitosamente\""
   },
   "author": "Anderson Mantilla",
   "license": "ISC",
