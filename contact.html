@@ -75,7 +75,7 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link active">Contacto</a>
                     </div>
-                    <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Programación de Citas</a>
+                    <a href="admin.html" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Programación de Citas</a>
                 </div>
             </nav>
         </div>
@@ -106,46 +106,46 @@
                     <div class="col-lg-5 col-xl-5 contact-form wow fadeInLeft" data-wow-delay="0.1s">
                         <h2 class="display-5 text-white mb-2">Ponerse en Contacto</h2>
                         <p class="mb-4 text-white">Fisioterapia Avanzada cuenta con productos y servicios de alta calidad con un manejo y seguimiento de las actividades acordes con la ciencia del entrenamiento y del ejercicio, logrando la funcionalidad en el medio personal, laboral y deportivo.</p>
-                        <form>
+                        <form id="contact-form">
                             <div class="row g-3">
                                 <div class="col-lg-12 col-xl-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-transparent border border-white" id="name" placeholder="Nombre">
+                                        <input type="text" name="nombre" required class="form-control bg-transparent border border-white" id="name" placeholder="Nombre">
                                         <label for="name">Nombre</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-xl-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control bg-transparent border border-white" id="email" placeholder="Correo">
+                                        <input type="email" name="correo" required class="form-control bg-transparent border border-white" id="email" placeholder="Correo">
                                         <label for="email">Correo</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-xl-6">
                                     <div class="form-floating">
-                                        <input type="phone" class="form-control bg-transparent border border-white" id="phone" placeholder="Teléfono">
+                                        <input type="tel" name="telefono" required class="form-control bg-transparent border border-white" id="phone" placeholder="Teléfono">
                                         <label for="phone">Teléfono</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-xl-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-transparent border border-white" id="project" placeholder="Actividad">
+                                        <input type="text" name="actividad" class="form-control bg-transparent border border-white" id="project" placeholder="Actividad">
                                         <label for="project">Actividad</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-transparent border border-white" id="subject" placeholder="Motivo de Consulta">
+                                        <input type="text" name="motivo" required class="form-control bg-transparent border border-white" id="subject" placeholder="Motivo de Consulta">
                                         <label for="subject">Motivo de Consulta</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control bg-transparent border border-white" placeholder="Mensaje" id="message" style="height: 160px"></textarea>
+                                        <textarea name="mensaje" class="form-control bg-transparent border border-white" placeholder="Mensaje" id="message" style="height: 160px"></textarea>
                                         <label for="message">Mensaje</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-light text-primary w-100 py-3">Envia Mensaje</button>
+                                    <button type="submit" class="btn btn-light text-primary w-100 py-3">Envia Mensaje</button>
                                 </div>
                             </div>
                         </form>
@@ -258,6 +258,7 @@
         <script src="lib/waypoints/waypoints.min.js"></script>
         <script src="lib/owlcarousel/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/form-manager.js"></script>
         
     </body>
 

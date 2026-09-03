@@ -1,10 +1,10 @@
-# Terapia Web Page
+# Terapias Bogotá - Web Page
 
-Página web de terapia desplegada en GitHub Pages.
+Página web de fisioterapia desplegada en GitHub Pages con sistema de gestión de formularios.
 
 ## 🌐 Ver en vivo
 
-[Acceder a la página web](https://[TU-USUARIO].github.io/[NOMBRE-REPO]/)
+[Acceder a la página web](https://andma2020.github.io/Terapias-Bogota/)
 
 ## 🚀 Despliegue local
 
@@ -19,21 +19,110 @@ La página estará disponible en http://localhost:8080
 
 ## 📁 Estructura
 
-- `terapia-1.0.0/` - Archivos del sitio web
-  - `index.html` - Página principal
-  - `css/` - Estilos
-  - `js/` - Scripts
-  - `img/` - Imágenes
-  - `lib/` - Librerías externas
+- `index.html` - Página principal con formulario de citas
+- `appointment.html` - Página de agendamiento de citas
+- `contact.html` - Página de contacto
+- `admin.html` - Panel de administración para gestionar formularios
+- `css/` - Estilos (Bootstrap + personalizados)
+- `js/` - Scripts (main.js + form-manager.js)
+- `img/` - Imágenes del sitio
+- `lib/` - Librerías externas (Bootstrap, jQuery, Owl Carousel, WOW.js)
 
 ## 🛠️ Tecnologías
 
 - HTML5
-- CSS3 (Bootstrap)
-- JavaScript
+- CSS3 (Bootstrap 5)
+- JavaScript (ES6+)
 - jQuery
 - Owl Carousel
 - WOW.js
+- LocalStorage (para persistencia de datos)
+
+## 📋 Sistema de Formularios
+
+### Formularios Disponibles
+
+1. **Formulario de Citas (index.html)** - Agendamiento de citas principales
+2. **Formulario de Citas (appointment.html)** - Sistema de agendamiento
+3. **Formulario de Contacto (contact.html)** - Mensajes de contacto
+
+### Características
+
+- ✅ Validación de campos requeridos
+- ✅ Almacenamiento local (localStorage)
+- ✅ Panel de administración
+- ✅ Exportación de datos (JSON)
+- ✅ Filtros y búsqueda
+- ✅ Vista detallada de registros
+
+### Panel de Administración
+
+Accede al panel de administración en: `admin.html`
+
+**Funcionalidades:**
+- Ver todos los registros de formularios
+- Estadísticas en tiempo real
+- Filtrar por tipo de formulario
+- Buscar por nombre, correo, teléfono
+- Ver detalles completos de cada registro
+- Eliminar registros individuales
+- Exportar todos los datos a JSON
+- Eliminar todos los datos
+
+### Uso de los Formularios
+
+Los formularios guardan automáticamente los datos en el navegador del usuario. Para ver los datos:
+
+1. Accede a `admin.html`
+2. Verás todos los registros enviados
+3. Puedes exportar los datos en formato JSON
+
+## 🔧 Configuración
+
+### Variables del Sistema
+
+El sistema usa localStorage con la clave: `terapias_bogota_data`
+
+### Estructura de Datos
+
+```json
+{
+  "id": 1234567890,
+  "type": "cita",
+  "timestamp": "2024-01-01T12:00:00.000Z",
+  "data": {
+    "nombre": "Juan Pérez",
+    "correo": "juan@email.com",
+    "telefono": "1234567890",
+    "genero": "Masculino",
+    "fecha": "2024-01-15",
+    "especialidad": "Fisioterapia",
+    "comentarios": "Comentarios adicionales"
+  }
+}
+```
+
+## 📊 Estadísticas
+
+El panel de administración muestra:
+- Total de registros
+- Citas agendadas
+- Mensajes de contacto
+- Citas desde página principal
+
+## 🔄 Actualización de Datos
+
+Los datos se actualizan automáticamente cuando:
+- Se envía un formulario
+- Se accede al panel de administración
+- Se realizan cambios en los registros
+
+## 🚨 Notas Importantes
+
+- Los datos se almacenan localmente en el navegador
+- Para ver datos de diferentes usuarios, necesitas un backend
+- Los datos persisten incluso si se cierra el navegador
+- Se recomienda exportar los datos regularmente
 
 ## 👤 Autor
 
@@ -42,3 +131,9 @@ Anderson Mantilla
 ## 📄 Licencia
 
 ISC
+
+## 📞 Contacto
+
+- Email: terapiasbogota@gmail.com
+- Teléfono: +571 3214304913
+- Ubicación: Bogotá, Colombia

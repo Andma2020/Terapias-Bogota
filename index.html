@@ -82,7 +82,7 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contacto</a>
                 </div>
-                <a href="#"
+                <a href="admin.html"
                     class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Programación de
                     Citas</a>
             </div>
@@ -383,52 +383,52 @@
                                 <div class="appointment-form rounded p-5">
                                     <p class="fs-4 text-uppercase text-primary">Pongamonos en Contacto</p>
                                     <h1 class="display-5 mb-4">Agenda tu Cita</h1>
-                                    <form>
+                                    <form id="index-form">
                                         <div class="row gy-3 gx-4">
                                             <div class="col-xl-6">
-                                                <input type="text"
+                                                <input type="text" name="nombre" required
                                                     class="form-control py-3 border-primary bg-transparent text-white"
                                                     placeholder="Nombre">
                                             </div>
                                             <div class="col-xl-6">
-                                                <input type="email"
+                                                <input type="email" name="correo" required
                                                     class="form-control py-3 border-primary bg-transparent text-white"
                                                     placeholder="Correo">
                                             </div>
                                             <div class="col-xl-6">
-                                                <input type="phone"
+                                                <input type="tel" name="telefono" required
                                                     class="form-control py-3 border-primary bg-transparent"
                                                     placeholder="Teléfono">
                                             </div>
                                             <div class="col-xl-6">
-                                                <select class="form-select py-3 border-primary bg-transparent"
-                                                    aria-label="Default select example">
-                                                    <option selected>Género</option>
-                                                    <option value="1">Masculino</option>
-                                                    <option value="2">Femenino</option>
-                                                    <option value="3">Otro</option>
+                                                <select name="genero" class="form-select py-3 border-primary bg-transparent"
+                                                    aria-label="Default select example" required>
+                                                    <option value="">Género</option>
+                                                    <option value="Masculino">Masculino</option>
+                                                    <option value="Femenino">Femenino</option>
+                                                    <option value="Otro">Otro</option>
                                                 </select>
                                             </div>
                                             <div class="col-xl-6">
-                                                <input type="date"
+                                                <input type="date" name="fecha" required
                                                     class="form-control py-3 border-primary bg-transparent">
                                             </div>
                                             <div class="col-xl-6">
-                                                <select class="form-select py-3 border-primary bg-transparent"
-                                                    aria-label="Default select example">
-                                                    <option selected>Especialidad</option>
-                                                    <option value="1">Fisioterapia</option>
-                                                    <option value="2">Salud Física</option>
-                                                    <option value="2">Tratamientos</option>
+                                                <select name="especialidad" class="form-select py-3 border-primary bg-transparent"
+                                                    aria-label="Default select example" required>
+                                                    <option value="">Especialidad</option>
+                                                    <option value="Fisioterapia">Fisioterapia</option>
+                                                    <option value="Salud Física">Salud Física</option>
+                                                    <option value="Tratamientos">Tratamientos</option>
                                                 </select>
                                             </div>
                                             <div class="col-12">
-                                                <textarea class="form-control border-primary bg-transparent text-white"
-                                                    name="text" id="area-text" cols="30" rows="5"
+                                                <textarea name="comentarios" class="form-control border-primary bg-transparent text-white"
+                                                    id="area-text" cols="30" rows="5"
                                                     placeholder="Dejanos tus Comentarios"></textarea>
                                             </div>
                                             <div class="col-12">
-                                                <button type="button"
+                                                <button type="submit"
                                                     class="btn btn-primary text-white w-100 py-3 px-5">ENVIAR
                                                     AHORA</button>
                                             </div>
@@ -647,6 +647,7 @@
                 <script src="lib/waypoints/waypoints.min.js"></script>
                 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
                 <script src="js/main.js"></script>
+                <script src="js/form-manager.js"></script>
 
 </body>
 
