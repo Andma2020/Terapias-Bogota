@@ -1,0 +1,16 @@
+{
+  "name": "ProyectoFinal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server . -p 8080 -o",
+    "dev": "http-server . -p 8080 -o",
+    "test": "echo \"test\" && exit 1"
+  },
+  "author": "Anderson Mantilla",
+  "license": "ISC",
+  "description": "Test Page",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
