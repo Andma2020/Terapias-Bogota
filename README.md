@@ -23,7 +23,12 @@ La página estará disponible en http://localhost:8080
 - `appointment.html` - Página de agendamiento de citas
 - `contact.html` - Página de contacto
 - `admin.html` - Panel de administración para gestionar formularios
-- `css/` - Estilos (Bootstrap + personalizados)
+- `css/` - Estilos compilados (Bootstrap + personalizados)
+- `scss/` - Archivos fuente SCSS organizados por tipo
+  - `variables/` - Variables globales (colores, tipografía, espaciado)
+  - `components/` - Componentes reutilizables (botones, formularios, tarjetas)
+  - `layout/` - Layout y estructura (header, footer, secciones)
+  - `utilities/` - Utilidades y helpers (animaciones, helpers)
 - `js/` - Scripts (main.js + form-manager.js)
 - `img/` - Imágenes del sitio
 - `lib/` - Librerías externas (Bootstrap, jQuery, Owl Carousel, WOW.js)
@@ -31,12 +36,28 @@ La página estará disponible en http://localhost:8080
 ## 🛠️ Tecnologías
 
 - HTML5
-- CSS3 (Bootstrap 5)
+- CSS3 (Bootstrap 5 + SCSS organizado)
 - JavaScript (ES6+)
 - jQuery
 - Owl Carousel
 - WOW.js
 - LocalStorage (para persistencia de datos)
+
+## 🎨 Estructura SCSS
+
+El proyecto utiliza una estructura SCSS organizada por tipo de archivo:
+
+### Directorios SCSS
+- **variables/** - Variables globales del proyecto
+- **components/** - Componentes UI reutilizables
+- **layout/** - Estructura y layout de páginas
+- **utilities/** - Helpers y utilidades
+
+### Archivos Principales
+- `main.scss` - Archivo principal que importa todos los módulos
+- `bootstrap.scss` - Punto de entrada para compatibilidad
+
+Para más detalles, ver `scss/README.md` y `scss/MAINTENANCE.md`
 
 ## 📋 Sistema de Formularios
 
