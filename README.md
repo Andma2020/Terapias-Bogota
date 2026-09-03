@@ -35,13 +35,14 @@ La página estará disponible en http://localhost:8080
 
 ## 🛠️ Tecnologías
 
-- HTML5
-- CSS3 (Bootstrap 5 + SCSS organizado)
-- JavaScript (ES6+)
+- HTML5 (Estructura semántica WCAG 2.1 AA)
+- CSS3 (Bootstrap 5 + SCSS organizado + Estilos accesibles)
+- JavaScript (ES6+ + Gestión de accesibilidad)
 - jQuery
 - Owl Carousel
 - WOW.js
 - LocalStorage (para persistencia de datos)
+- ARIA (Roles, estados y propiedades accesibles)
 
 ## 🎨 Estructura SCSS
 
@@ -58,6 +59,42 @@ El proyecto utiliza una estructura SCSS organizada por tipo de archivo:
 - `bootstrap.scss` - Punto de entrada para compatibilidad
 
 Para más detalles, ver `scss/README.md` y `scss/MAINTENANCE.md`
+
+## ♿ Accesibilidad (WCAG 2.1 AA)
+
+El sitio cumple con los estándares de accesibilidad WCAG 2.1 Nivel AA:
+
+### Características Accesibles
+- ✅ **Navegación por teclado** completa con skip links
+- ✅ **Contraste de colores** WCAG AA compliant
+- ✅ **Formularios accesibles** con labels y validación
+- ✅ **ARIA labels** para componentes interactivos
+- ✅ **Soporte para lectores de pantalla**
+- ✅ **Modo alto contraste** y reducción de movimiento
+- ✅ **Estructura semántica** HTML5 apropiada
+- ✅ **Textos alternativos** descriptivos en imágenes
+
+### Controles de Usuario
+```javascript
+// Modo alto contraste
+enableHighContrast();
+disableHighContrast();
+
+// Reducción de movimiento
+toggleReducedMotion();
+
+// Tamaño de fuente
+increaseFontSize();
+decreaseFontSize();
+resetFontSize();
+```
+
+### Atajos de Teclado
+- `Alt+M` - Saltar al contenido principal
+- `Alt+N` - Saltar a la navegación
+- `Escape` - Cerrar modales y menús
+
+Para más detalles, ver `ACCESIBILIDAD.md`
 
 ## 📋 Sistema de Formularios
 

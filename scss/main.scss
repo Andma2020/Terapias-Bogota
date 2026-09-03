@@ -26,7 +26,10 @@
 @import 'utilities/animations';
 @import 'utilities/helpers';
 
-// 5. Bootstrap (mantener compatibilidad)
+// 5. Accesibilidad (WCAG 2.1 AA Compliance)
+@import 'accessibility/main';
+
+// 6. Bootstrap (mantener compatibilidad)
 @import 'bootstrap/scss/bootstrap';
 
 // 6. Estilos personalizados adicionales
