@@ -1,3 +1,0 @@
-Archivo de prueba para el comando deploy
-Verificando el flujo completo de despliegue
-Fecha: 2024-09-03

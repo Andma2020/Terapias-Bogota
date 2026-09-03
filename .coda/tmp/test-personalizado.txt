@@ -1,3 +1,0 @@
-Archivo de prueba para commit con mensaje personalizado
-Verificando la funcionalidad de mensajes personalizados
-Fecha: 2024-09-03
