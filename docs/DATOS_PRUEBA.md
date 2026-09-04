@@ -67,7 +67,32 @@ Este sistema permite cargar datos de prueba en la base de datos para verificar q
 
 ## 🚀 Cómo Usar el Sistema
 
-### **Opción 1: Carga Automática (Recomendada)**
+### **Opción 1: Carga Directa en Panel de Administración (Recomendada)**
+
+1. **Accede al panel de administración:**
+   ```
+   file:///C:/Users/anderson.mantilla/TestPage-main/TestPage/admin-login.html
+   ```
+   O en GitHub Pages:
+   ```
+   https://andma2020.github.io/Terapias-Bogota/admin-login.html
+   ```
+
+2. **Inicia sesión:**
+   - Usuario: `admin`
+   - Contraseña: `terapias2024`
+
+3. **Carga los datos de prueba:**
+   - Si no hay datos, verás un mensaje "No hay registros disponibles"
+   - Haz clic en el botón **"Cargar Datos de Prueba"**
+   - Los datos se cargarán automáticamente y aparecerán en la tabla
+   - Verás un mensaje de éxito con las estadísticas
+
+4. **Visualiza los datos:**
+   - Los 10 registros aparecerán inmediatamente en la tabla
+   - Puedes filtrar, buscar, ver detalles, etc.
+
+### **Opción 2: Carga desde Página Separada**
 
 1. **Abre el archivo de carga automática:**
    ```
@@ -86,20 +111,6 @@ Este sistema permite cargar datos de prueba en la base de datos para verificar q
 3. **Ve al panel de administración:**
    - Haz clic en "Ir al Panel de Administración"
    - O accede directamente: `admin-login.html`
-
-### **Opción 2: Carga Manual**
-
-1. **Abre el archivo de carga manual:**
-   ```
-   file:///C:/Users/anderson.mantilla/TestPage-main/TestPage/test-data.html
-   ```
-
-2. **Haz clic en "Cargar Datos de Prueba":**
-   - Los datos se cargarán en localStorage
-   - Verás un resumen de los datos cargados
-
-3. **Ve al panel de administración:**
-   - Haz clic en "Ir al Panel de Administración"
 
 ## 🔐 Acceso al Panel de Administración
 
@@ -136,15 +147,16 @@ Este sistema permite cargar datos de prueba en la base de datos para verificar q
 
 ## 🧪 Verificación del Sistema
 
-### **Paso 1: Cargar Datos de Prueba**
-1. Abre `auto-load-data.html`
-2. Espera la carga automática
-3. Verifica que aparezca el mensaje de éxito
-
-### **Paso 2: Acceder al Panel Admin**
-1. Haz clic en "Ir al Panel de Administración"
+### **Paso 1: Acceder al Panel de Administración**
+1. Abre `admin-login.html`
 2. Ingresa las credenciales: `admin` / `terapias2024`
 3. Verifica que puedas acceder
+
+### **Paso 2: Cargar Datos de Prueba**
+1. Si no hay datos, verás el mensaje "No hay registros disponibles"
+2. Haz clic en el botón **"Cargar Datos de Prueba"**
+3. Espera la notificación de éxito
+4. Verifica que aparezca el mensaje con estadísticas
 
 ### **Paso 3: Verificar Datos**
 1. Revisa las estadísticas (deben mostrar 5 citas y 5 contactos)
@@ -161,12 +173,19 @@ Este sistema permite cargar datos de prueba en la base de datos para verificar q
 
 ## 🔄 Limpiar Datos de Prueba
 
+### **Desde el panel de administración (Recomendado):**
+1. Accede al panel de administración
+2. Si hay datos, verás el botón **"Limpiar Datos"** en el estado vacío
+3. Haz clic en "Limpiar Datos"
+4. Confirma la eliminación
+5. Todos los datos serán eliminados
+
 ### **Desde la página de carga:**
 1. Abre `auto-load-data.html` o `test-data.html`
 2. Haz clic en "Limpiar Datos de Prueba"
 3. Confirma la eliminación
 
-### **Desde el panel admin:**
+### **Desde el panel admin (individual):**
 1. Accede al panel de administración
 2. Usa el botón de eliminar en cada registro
 3. O elimina todos los registros manualmente
@@ -234,10 +253,11 @@ Este sistema permite cargar datos de prueba en la base de datos para verificar q
 ## 🎉 Resumen
 
 ### **✅ Sistema Funcional:**
-- Datos de prueba cargados correctamente
+- Datos de prueba integrados directamente en el panel de administración
 - Panel de administración accesible
 - Todas las funcionalidades operativas
 - Compatible con GitHub Pages
+- Experiencia de usuario fluida (carga y visualización en el mismo lugar)
 
 ### **📊 Datos Disponibles:**
 - 5 citas de prueba con información completa
@@ -245,17 +265,26 @@ Este sistema permite cargar datos de prueba en la base de datos para verificar q
 - Total: 10 registros para probar el sistema
 
 ### **🚀 Listo para Usar:**
-- Sistema de carga automática implementado
+- Sistema de carga integrado en el panel de administración
 - Panel de administración funcional
 - Documentación completa
 - Subido a GitHub
+- Experiencia unificada: carga y visualización en el mismo lugar
+
+### **🎯 Ventajas del Nuevo Sistema:**
+- ✅ **Experiencia unificada:** Carga y visualización en el mismo panel
+- ✅ **Más intuitivo:** No hay que navegar entre páginas diferentes
+- ✅ **Más rápido:** Los datos aparecen inmediatamente después de cargar
+- ✅ **Más profesional:** Todo integrado en el panel de administración
+- ✅ **Más práctico:** Puedes cargar, ver y gestionar datos en un solo lugar
 
 ---
 
-**Estado:** ✅ Sistema de datos de prueba implementado y funcional  
+**Estado:** ✅ Sistema de datos de prueba integrado en panel de administración  
 **Datos cargados:** 10 registros (5 citas + 5 contactos)  
 **Panel admin:** Accesible con credenciales admin/terapias2024  
 **GitHub Pages:** Funcional y accesible desde cualquier navegador  
+**Experiencia:** Unificada y fluida (carga + visualización en el mismo lugar)  
 
 **Última actualización:** Septiembre 2024  
-**Versión:** 1.0 (Sistema de datos de prueba)
+**Versión:** 2.0 (Sistema integrado en panel de administración)
