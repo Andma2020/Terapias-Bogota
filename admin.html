@@ -334,15 +334,29 @@
             try {
                 console.log('🔍 Iniciando carga de datos...');
                 
-                const data = await formManagerV2.getAllData();
-                console.log('📊 Datos obtenidos:', data);
-                console.log('📊 Citas:', data.citas.length);
-                console.log('📊 Contactos:', data.contactos.length);
+                // Cargar directamente desde localStorage
+                const storageKey = 'terapias_bogota_data';
+                const rawData = localStorage.getItem(storageKey);
+                console.log('📊 Datos crudos de localStorage:', rawData);
+                
+                let data = { citas: [], contactos: [] };
+                
+                if (rawData) {
+                    try {
+                        data = JSON.parse(rawData);
+                        console.log('📊 Datos parseados:', data);
+                    } catch (e) {
+                        console.error('❌ Error al parsear datos:', e);
+                    }
+                }
+                
+                console.log('📊 Citas:', data.citas?.length || 0);
+                console.log('📊 Contactos:', data.contactos?.length || 0);
                 
                 // Combinar citas y contactos
                 allData = [
-                    ...data.citas.map(item => ({ ...item, type: 'cita' })),
-                    ...data.contactos.map(item => ({ ...item, type: 'contacto' }))
+                    ...(data.citas || []).map(item => ({ ...item, type: 'cita' })),
+                    ...(data.contactos || []).map(item => ({ ...item, type: 'contacto' }))
                 ];
                 
                 console.log('📊 Datos combinados:', allData.length);

@@ -266,31 +266,63 @@
         <!-- Sistema de formularios V2 -->
         <script src="js/form-manager-v2.js"></script>
         
-        <!-- Inicialización explícita del sistema de formularios -->
+        <!-- Sistema simplificado de formularios -->
         <script>
-            // Esperar a que el DOM esté completamente cargado
+            const STORAGE_KEY = 'terapias_bogota_data';
+            
+            // Sistema de formularios simplificado
             document.addEventListener('DOMContentLoaded', function() {
-                console.log('🔍 DOM completamente cargado (contact.html)');
+                console.log('🔍 Sistema de formularios simplificado iniciado (contact.html)');
                 
-                // Verificar que formManagerV2 esté disponible
-                if (typeof formManagerV2 !== 'undefined') {
-                    console.log('✅ FormManagerV2 disponible');
+                // Configurar formulario de contacto
+                const contactForm = document.getElementById('contact-form');
+                if (contactForm) {
+                    console.log('✅ Formulario contact-form encontrado');
                     
-                    // Verificar que los formularios existan
-                    const contactForm = document.getElementById('contact-form');
-                    
-                    console.log('📋 Formularios encontrados:', {
-                        'contact-form': !!contactForm
+                    contactForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        console.log('📝 Formulario contact-form enviado');
+                        
+                        try {
+                            // Recopilar datos
+                            const formData = {
+                                id: 'contacto-' + Date.now(),
+                                timestamp: new Date().toISOString(),
+                                nombre: contactForm.querySelector('[name="nombre"]').value,
+                                email: contactForm.querySelector('[name="email"]').value,
+                                asunto: contactForm.querySelector('[name="asunto"]').value,
+                                mensaje: contactForm.querySelector('[name="mensaje"]').value,
+                                type: 'contacto',
+                                status: 'pendiente'
+                            };
+                            
+                            console.log('📊 Datos recopilados:', formData);
+                            
+                            // Guardar en localStorage
+                            const existingData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                            if (!existingData.contactos) {
+                                existingData.contactos = [];
+                            }
+                            
+                            existingData.contactos.push(formData);
+                            localStorage.setItem(STORAGE_KEY, JSON.stringify(existingData));
+                            
+                            console.log('✅ Datos guardados en localStorage');
+                            console.log('📊 Total contactos:', existingData.contactos.length);
+                            
+                            // Mostrar notificación
+                            alert('¡Mensaje enviado exitosamente!');
+                            
+                            // Limpiar formulario
+                            contactForm.reset();
+                            
+                        } catch (error) {
+                            console.error('❌ Error al procesar formulario:', error);
+                            alert('Error al enviar el mensaje. Por favor intenta nuevamente.');
+                        }
                     });
-                    
-                    // Forzar re-inicialización si es necesario
-                    if (contactForm && !contactForm.hasAttribute('data-form-manager-initialized')) {
-                        console.log('🔄 Re-inicializando formulario contact-form');
-                        formManagerV2.setupForm('contact-form', 'contacto');
-                        contactForm.setAttribute('data-form-manager-initialized', 'true');
-                    }
                 } else {
-                    console.error('❌ FormManagerV2 no está disponible');
+                    console.warn('⚠️ Formulario contact-form no encontrado');
                 }
             });
         </script>
