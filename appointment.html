@@ -314,6 +314,35 @@
     <script src="js/firebase-config.js"></script>
     <!-- Sistema de formularios V2 -->
     <script src="js/form-manager-v2.js"></script>
+    
+    <!-- Inicialización explícita del sistema de formularios -->
+    <script>
+        // Esperar a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 DOM completamente cargado (appointment.html)');
+            
+            // Verificar que formManagerV2 esté disponible
+            if (typeof formManagerV2 !== 'undefined') {
+                console.log('✅ FormManagerV2 disponible');
+                
+                // Verificar que los formularios existan
+                const appointmentForm = document.getElementById('appointment-form');
+                
+                console.log('📋 Formularios encontrados:', {
+                    'appointment-form': !!appointmentForm
+                });
+                
+                // Forzar re-inicialización si es necesario
+                if (appointmentForm && !appointmentForm.hasAttribute('data-form-manager-initialized')) {
+                    console.log('🔄 Re-inicializando formulario appointment-form');
+                    formManagerV2.setupForm('appointment-form', 'cita');
+                    appointmentForm.setAttribute('data-form-manager-initialized', 'true');
+                }
+            } else {
+                console.error('❌ FormManagerV2 no está disponible');
+            }
+        });
+    </script>
 
 </body>
 
