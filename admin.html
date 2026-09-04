@@ -277,6 +277,31 @@
                 <i class="fas fa-inbox"></i>
                 <h3>No hay registros disponibles</h3>
                 <p>Los formularios enviados aparecerán aquí</p>
+                
+                <div class="mt-4">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>¿Quieres probar el sistema?</strong>
+                        <p class="mb-0">Carga datos de prueba para ver cómo funciona el panel de administración.</p>
+                    </div>
+                    
+                    <div class="d-flex justify-content-center gap-2 flex-wrap">
+                        <button class="btn btn-primary" onclick="loadTestData()">
+                            <i class="fas fa-database me-2"></i>Cargar Datos de Prueba
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="clearTestData()">
+                            <i class="fas fa-trash me-2"></i>Limpiar Datos
+                        </button>
+                    </div>
+                    
+                    <div id="test-data-status" class="mt-3" style="display: none;">
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Datos de prueba cargados exitosamente</strong>
+                            <p class="mb-0 mt-2" id="test-data-info"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -596,6 +621,225 @@
             setTimeout(() => {
                 notification.remove();
             }, 5000);
+        }
+
+        // ==========================================
+        // SISTEMA DE DATOS DE PRUEBA
+        // ==========================================
+
+        // Datos de prueba para citas
+        const testCitas = [
+            {
+                id: 'cita-001',
+                type: 'cita',
+                nombre: 'María García López',
+                correo: 'maria.garcia@email.com',
+                telefono: '3101234567',
+                genero: 'Femenino',
+                fecha: '2024-09-10',
+                especialidad: 'Fisioterapia',
+                comentarios: 'Necesito tratamiento para dolor lumbar crónico. Prefiero horario de la mañana.',
+                timestamp: '2024-09-03T08:30:00.000Z',
+                status: 'pendiente',
+                userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                ip: '190.24.145.67'
+            },
+            {
+                id: 'cita-002',
+                type: 'cita',
+                nombre: 'Carlos Rodríguez Martínez',
+                correo: 'carlos.rodriguez@email.com',
+                telefono: '3209876543',
+                genero: 'Masculino',
+                fecha: '2024-09-12',
+                especialidad: 'Terapia Ocupacional',
+                comentarios: 'Recuperación de lesión en hombro derecho. Necesito evaluación completa.',
+                timestamp: '2024-09-03T10:15:00.000Z',
+                status: 'completado',
+                userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+                ip: '181.143.89.12'
+            },
+            {
+                id: 'cita-003',
+                type: 'cita',
+                nombre: 'Ana María Fernández',
+                correo: 'ana.fernandez@email.com',
+                telefono: '3155551234',
+                genero: 'Femenino',
+                fecha: '2024-09-15',
+                especialidad: 'Fonoaudiología',
+                comentarios: 'Evaluación de lenguaje para mi hijo de 5 años. Preferencia tarde.',
+                timestamp: '2024-09-03T14:20:00.000Z',
+                status: 'pendiente',
+                userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15',
+                ip: '200.71.234.56'
+            },
+            {
+                id: 'cita-004',
+                type: 'cita',
+                nombre: 'Jorge Enrique Pérez',
+                correo: 'jorge.perez@email.com',
+                telefono: '3007778888',
+                genero: 'Masculino',
+                fecha: '2024-09-18',
+                especialidad: 'Psicología',
+                comentarios: 'Consulta por ansiedad y estrés laboral. Necesito orientación profesional.',
+                timestamp: '2024-09-03T16:45:00.000Z',
+                status: 'cancelado',
+                userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                ip: '186.145.67.89'
+            },
+            {
+                id: 'cita-005',
+                type: 'cita',
+                nombre: 'Laura Sofía Ramírez',
+                correo: 'laura.ramirez@email.com',
+                telefono: '3112223333',
+                genero: 'Femenino',
+                fecha: '2024-09-20',
+                especialidad: 'Nutrición',
+                comentarios: 'Plan nutricional para pérdida de peso. Tengo condiciones específicas.',
+                timestamp: '2024-09-03T18:30:00.000Z',
+                status: 'pendiente',
+                userAgent: 'Mozilla/5.0 (Android 11; Mobile; rv:68.0) Gecko/68.0 Firefox/68.0',
+                ip: '179.52.123.45'
+            }
+        ];
+
+        // Datos de prueba para contactos
+        const testContactos = [
+            {
+                id: 'contacto-001',
+                type: 'contacto',
+                nombre: 'Pedro Antonio Gómez',
+                correo: 'pedro.gomez@email.com',
+                telefono: '3184445555',
+                asunto: 'Información general',
+                mensaje: 'Hola, me gustaría conocer más información sobre los servicios de fisioterapia que ofrecen. ¿Cuáles son los horarios de atención y cuáles son los costos aproximados?',
+                timestamp: '2024-09-03T09:00:00.000Z',
+                status: 'pendiente',
+                userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                ip: '190.24.145.67'
+            },
+            {
+                id: 'contacto-002',
+                type: 'contacto',
+                nombre: 'Carmen Elena Torres',
+                correo: 'carmen.torres@email.com',
+                telefono: '3176667777',
+                asunto: 'Cita urgente',
+                mensaje: 'Necesito una cita de emergencia para hoy mismo si es posible. Tengo un dolor muy fuerte en la espalda y no puedo moverme. Por favor contáctenme lo antes posible.',
+                timestamp: '2024-09-03T11:30:00.000Z',
+                status: 'completado',
+                userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+                ip: '181.143.89.12'
+            },
+            {
+                id: 'contacto-003',
+                type: 'contacto',
+                nombre: 'Roberto Carlos Silva',
+                correo: 'roberto.silva@email.com',
+                telefono: '3198889999',
+                asunto: 'Servicios corporativos',
+                mensaje: 'Represento a una empresa y estamos interesados en contratar servicios de terapia ocupacional para nuestros empleados. ¿Ofrecen planes corporativos o descuentos por volumen?',
+                timestamp: '2024-09-03T13:15:00.000Z',
+                status: 'pendiente',
+                userAgent: 'Mozilla/5.0 (iPad; CPU OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15',
+                ip: '200.71.234.56'
+            },
+            {
+                id: 'contacto-004',
+                type: 'contacto',
+                nombre: 'Diana Marcela Vargas',
+                correo: 'diana.vargas@email.com',
+                telefono: '3130001111',
+                asunto: 'Recomendación',
+                mensaje: 'Quiero dejar una recomendación muy positiva. El tratamiento que recibí fue excelente y el personal muy profesional. Gracias por su excelente servicio.',
+                timestamp: '2024-09-03T15:00:00.000Z',
+                status: 'completado',
+                userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                ip: '186.145.67.89'
+            },
+            {
+                id: 'contacto-005',
+                type: 'contacto',
+                nombre: 'Andrés Felipe Muñoz',
+                correo: 'andres.munoz@email.com',
+                telefono: '3122223333',
+                asunto: 'Horarios de atención',
+                mensaje: '¿Cuáles son los horarios de atención durante la semana? ¿Atienden los fines de semana? Necesito programar una cita fuera del horario laboral normal.',
+                timestamp: '2024-09-03T17:45:00.000Z',
+                status: 'pendiente',
+                userAgent: 'Mozilla/5.0 (Linux; Android 10; SM-A505FN) AppleWebKit/537.36',
+                ip: '179.52.123.45'
+            }
+        ];
+
+        // Cargar datos de prueba
+        async function loadTestData() {
+            try {
+                // Mostrar notificación de carga
+                showNotification('Cargando datos de prueba...', 'info');
+
+                // Obtener datos existentes
+                const existingData = await formManagerV2.getAllData();
+
+                // Preparar datos nuevos
+                const newData = {
+                    citas: [...(existingData.citas || []), ...testCitas],
+                    contactos: [...(existingData.contactos || []), ...testContactos]
+                };
+
+                // Guardar en localStorage
+                localStorage.setItem('terapias_bogota_data', JSON.stringify(newData));
+
+                // Mostrar mensaje de éxito
+                const statusDiv = document.getElementById('test-data-status');
+                const infoDiv = document.getElementById('test-data-info');
+                
+                statusDiv.style.display = 'block';
+                infoDiv.innerHTML = `
+                    <strong>✅ ${testCitas.length} citas</strong> y <strong>${testContactos.length} contactos</strong> cargados exitosamente.<br>
+                    Total en base de datos: <strong>${newData.citas.length + newData.contactos.length} registros</strong>
+                `;
+
+                // Recargar datos
+                await loadData();
+
+                // Mostrar notificación de éxito
+                showNotification('Datos de prueba cargados exitosamente', 'success');
+
+                console.log('✅ Datos de prueba cargados:', newData);
+
+            } catch (error) {
+                console.error('Error al cargar datos de prueba:', error);
+                showNotification('Error al cargar datos de prueba: ' + error.message, 'error');
+            }
+        }
+
+        // Limpiar datos de prueba
+        async function clearTestData() {
+            if (!confirm('¿Estás seguro de que quieres eliminar todos los datos?')) return;
+
+            try {
+                // Limpiar localStorage
+                localStorage.removeItem('terapias_bogota_data');
+
+                // Ocultar mensaje de estado
+                document.getElementById('test-data-status').style.display = 'none';
+
+                // Recargar datos
+                await loadData();
+
+                // Mostrar notificación
+                showNotification('Datos eliminados correctamente', 'success');
+
+                console.log('✅ Datos eliminados');
+
+            } catch (error) {
+                console.error('Error al eliminar datos:', error);
+                showNotification('Error al eliminar datos: ' + error.message, 'error');
+            }
         }
     </script>
 </body>
