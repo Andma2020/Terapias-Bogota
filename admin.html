@@ -349,6 +349,19 @@
             
             // Cargar datos iniciales
             loadData();
+            
+            // Verificar si hay datos, si no, cargar automáticamente
+            setTimeout(async () => {
+                const data = await formManagerV2.getAllData();
+                const totalRecords = (data.citas?.length || 0) + (data.contactos?.length || 0);
+                
+                console.log('🔍 Verificación inicial de datos:', totalRecords);
+                
+                if (totalRecords === 0) {
+                    console.log('⚠️ No hay datos, cargando automáticamente...');
+                    await loadTestData();
+                }
+            }, 1000);
         });
 
         // Cargar datos
