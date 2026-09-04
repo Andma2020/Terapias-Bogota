@@ -333,15 +333,40 @@
                     console.log('📝 Formulario appointment-form enviado');
                     
                     try {
+                        // Verificar que los campos existan
+                        const nombreField = appointmentForm.querySelector('[name="nombre"]');
+                        const correoField = appointmentForm.querySelector('[name="correo"]');
+                        const telefonoField = appointmentForm.querySelector('[name="telefono"]');
+                        const generoField = appointmentForm.querySelector('[name="genero"]');
+                        const fechaField = appointmentForm.querySelector('[name="fecha"]');
+                        const especialidadField = appointmentForm.querySelector('[name="especialidad"]');
+                        const comentariosField = appointmentForm.querySelector('[name="comentarios"]');
+                        
+                        console.log('🔍 Campos encontrados:', {
+                            nombre: !!nombreField,
+                            correo: !!correoField,
+                            telefono: !!telefonoField,
+                            genero: !!generoField,
+                            fecha: !!fechaField,
+                            especialidad: !!especialidadField,
+                            comentarios: !!comentariosField
+                        });
+                        
+                        if (!nombreField || !correoField || !telefonoField || !fechaField || !especialidadField) {
+                            throw new Error('Faltan campos requeridos en el formulario');
+                        }
+                        
                         // Recopilar datos
                         const formData = {
                             id: 'cita-' + Date.now(),
                             timestamp: new Date().toISOString(),
-                            nombre: appointmentForm.querySelector('[name="nombre"]').value,
-                            email: appointmentForm.querySelector('[name="email"]').value,
-                            telefono: appointmentForm.querySelector('[name="telefono"]').value,
-                            fecha: appointmentForm.querySelector('[name="fecha"]').value,
-                            especialidad: appointmentForm.querySelector('[name="especialidad"]').value,
+                            nombre: nombreField.value,
+                            email: correoField.value,
+                            telefono: telefonoField.value,
+                            genero: generoField ? generoField.value : '',
+                            fecha: fechaField.value,
+                            especialidad: especialidadField.value,
+                            comentarios: comentariosField ? comentariosField.value : '',
                             type: 'cita',
                             status: 'pendiente'
                         };
@@ -368,7 +393,7 @@
                         
                     } catch (error) {
                         console.error('❌ Error al procesar formulario:', error);
-                        alert('Error al programar la cita. Por favor intenta nuevamente.');
+                        alert('Error al programar la cita: ' + error.message);
                     }
                 });
             } else {

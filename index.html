@@ -745,17 +745,40 @@
                                 console.log('📝 Formulario index-form enviado');
                                 
                                 try {
+                                    // Verificar que los campos existan
+                                    const nombreField = document.getElementById('nombre');
+                                    const emailField = document.getElementById('email');
+                                    const telefonoField = document.getElementById('telefono');
+                                    const fechaField = document.getElementById('fecha');
+                                    const especialidadField = document.getElementById('especialidad');
+                                    const generoField = document.getElementById('genero');
+                                    const comentariosField = document.getElementById('comentarios');
+                                    
+                                    console.log('🔍 Campos encontrados:', {
+                                        nombre: !!nombreField,
+                                        email: !!emailField,
+                                        telefono: !!telefonoField,
+                                        fecha: !!fechaField,
+                                        especialidad: !!especialidadField,
+                                        genero: !!generoField,
+                                        comentarios: !!comentariosField
+                                    });
+                                    
+                                    if (!nombreField || !emailField || !telefonoField || !fechaField || !especialidadField) {
+                                        throw new Error('Faltan campos requeridos en el formulario');
+                                    }
+                                    
                                     // Recopilar datos
                                     const formData = {
                                         id: 'cita-' + Date.now(),
                                         timestamp: new Date().toISOString(),
-                                        nombre: document.getElementById('nombre').value,
-                                        email: document.getElementById('email').value,
-                                        telefono: document.getElementById('telefono').value,
-                                        fecha: document.getElementById('fecha').value,
-                                        especialidad: document.getElementById('especialidad').value,
-                                        genero: document.getElementById('genero').value,
-                                        comentarios: document.getElementById('comentarios').value,
+                                        nombre: nombreField.value,
+                                        email: emailField.value,
+                                        telefono: telefonoField.value,
+                                        fecha: fechaField.value,
+                                        especialidad: especialidadField.value,
+                                        genero: generoField ? generoField.value : '',
+                                        comentarios: comentariosField ? comentariosField.value : '',
                                         type: 'cita',
                                         status: 'pendiente'
                                     };
@@ -782,7 +805,7 @@
                                     
                                 } catch (error) {
                                     console.error('❌ Error al procesar formulario:', error);
-                                    alert('Error al enviar el formulario. Por favor intenta nuevamente.');
+                                    alert('Error al enviar el formulario: ' + error.message);
                                 }
                             });
                         } else {

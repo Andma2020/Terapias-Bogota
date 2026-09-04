@@ -284,14 +284,31 @@
                         console.log('📝 Formulario contact-form enviado');
                         
                         try {
+                            // Verificar que los campos existan
+                            const nombreField = contactForm.querySelector('[name="nombre"]');
+                            const emailField = contactForm.querySelector('[name="email"]');
+                            const asuntoField = contactForm.querySelector('[name="asunto"]');
+                            const mensajeField = contactForm.querySelector('[name="mensaje"]');
+                            
+                            console.log('🔍 Campos encontrados:', {
+                                nombre: !!nombreField,
+                                email: !!emailField,
+                                asunto: !!asuntoField,
+                                mensaje: !!mensajeField
+                            });
+                            
+                            if (!nombreField || !emailField || !asuntoField || !mensajeField) {
+                                throw new Error('Faltan campos requeridos en el formulario');
+                            }
+                            
                             // Recopilar datos
                             const formData = {
                                 id: 'contacto-' + Date.now(),
                                 timestamp: new Date().toISOString(),
-                                nombre: contactForm.querySelector('[name="nombre"]').value,
-                                email: contactForm.querySelector('[name="email"]').value,
-                                asunto: contactForm.querySelector('[name="asunto"]').value,
-                                mensaje: contactForm.querySelector('[name="mensaje"]').value,
+                                nombre: nombreField.value,
+                                email: emailField.value,
+                                asunto: asuntoField.value,
+                                mensaje: mensajeField.value,
                                 type: 'contacto',
                                 status: 'pendiente'
                             };
@@ -318,7 +335,7 @@
                             
                         } catch (error) {
                             console.error('❌ Error al procesar formulario:', error);
-                            alert('Error al enviar el mensaje. Por favor intenta nuevamente.');
+                            alert('Error al enviar el mensaje: ' + error.message);
                         }
                     });
                 } else {
