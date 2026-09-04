@@ -356,7 +356,12 @@
             showLoading(true);
             
             try {
+                console.log('🔍 Iniciando carga de datos...');
+                
                 const data = await formManagerV2.getAllData();
+                console.log('📊 Datos obtenidos:', data);
+                console.log('📊 Citas:', data.citas.length);
+                console.log('📊 Contactos:', data.contactos.length);
                 
                 // Combinar citas y contactos
                 allData = [
@@ -364,11 +369,17 @@
                     ...data.contactos.map(item => ({ ...item, type: 'contacto' }))
                 ];
                 
+                console.log('📊 Datos combinados:', allData.length);
+                
                 // Ordenar por fecha (más reciente primero)
                 allData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 
+                console.log('📊 Datos ordenados');
+                
                 // Aplicar filtros actuales
                 filterData();
+                
+                console.log('📊 Datos filtrados:', filteredData.length);
                 
                 // Actualizar estadísticas
                 updateStats(data);
@@ -376,8 +387,10 @@
                 // Actualizar fuente de datos
                 updateDataSource();
                 
+                console.log('✅ Datos cargados exitosamente');
+                
             } catch (error) {
-                console.error('Error al cargar datos:', error);
+                console.error('❌ Error al cargar datos:', error);
                 showNotification('Error al cargar los datos', 'error');
             } finally {
                 showLoading(false);
@@ -386,8 +399,14 @@
 
         // Filtrar datos
         function filterData() {
+            console.log('🔍 Iniciando filtrado de datos...');
+            console.log('📊 allData.length:', allData.length);
+            
             const typeFilter = document.getElementById('filter-type').value;
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            
+            console.log('🔍 Filtro tipo:', typeFilter);
+            console.log('🔍 Término búsqueda:', searchTerm);
 
             filteredData = allData.filter(item => {
                 // Filtro por tipo
@@ -402,20 +421,33 @@
                 return true;
             });
 
+            console.log('📊 filteredData.length:', filteredData.length);
+            console.log('🔍 Datos filtrados:', filteredData);
+
             renderTable();
         }
 
         // Renderizar tabla
         function renderTable() {
+            console.log('🔍 Iniciando renderizado de tabla...');
+            console.log('📊 filteredData.length:', filteredData.length);
+            
             const tableBody = document.getElementById('data-table-body');
             const emptyState = document.getElementById('empty-state');
             
+            console.log('🔍 Elementos DOM:', {
+                tableBody: !!tableBody,
+                emptyState: !!emptyState
+            });
+            
             if (filteredData.length === 0) {
+                console.log('⚠️ No hay datos para mostrar');
                 tableBody.innerHTML = '';
                 emptyState.classList.remove('d-none');
                 return;
             }
             
+            console.log('✅ Hay datos para mostrar:', filteredData.length);
             emptyState.classList.add('d-none');
             
             tableBody.innerHTML = filteredData.map(item => `
@@ -781,8 +813,11 @@
                 // Mostrar notificación de carga
                 showNotification('Cargando datos de prueba...', 'info');
 
+                console.log('🔍 Iniciando carga de datos de prueba...');
+
                 // Obtener datos existentes
                 const existingData = await formManagerV2.getAllData();
+                console.log('📊 Datos existentes:', existingData);
 
                 // Preparar datos nuevos
                 const newData = {
@@ -790,8 +825,22 @@
                     contactos: [...(existingData.contactos || []), ...testContactos]
                 };
 
+                console.log('📊 Nuevos datos a guardar:', {
+                    citas: newData.citas.length,
+                    contactos: newData.contactos.length,
+                    total: newData.citas.length + newData.contactos.length
+                });
+
                 // Guardar en localStorage
                 localStorage.setItem('terapias_bogota_data', JSON.stringify(newData));
+                console.log('✅ Datos guardados en localStorage');
+
+                // Verificar que se guardaron correctamente
+                const savedData = JSON.parse(localStorage.getItem('terapias_bogota_data'));
+                console.log('🔍 Datos guardados verificados:', {
+                    citas: savedData.citas.length,
+                    contactos: savedData.contactos.length
+                });
 
                 // Mostrar mensaje de éxito
                 const statusDiv = document.getElementById('test-data-status');
@@ -804,15 +853,17 @@
                 `;
 
                 // Recargar datos
+                console.log('🔄 Recargando datos...');
                 await loadData();
+                console.log('✅ Datos recargados');
 
                 // Mostrar notificación de éxito
                 showNotification('Datos de prueba cargados exitosamente', 'success');
 
-                console.log('✅ Datos de prueba cargados:', newData);
+                console.log('✅ Datos de prueba cargados completamente:', newData);
 
             } catch (error) {
-                console.error('Error al cargar datos de prueba:', error);
+                console.error('❌ Error al cargar datos de prueba:', error);
                 showNotification('Error al cargar datos de prueba: ' + error.message, 'error');
             }
         }
