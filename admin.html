@@ -448,7 +448,7 @@
                         </span>
                     </td>
                     <td>${item.nombre || 'N/A'}</td>
-                    <td>${item.correo || 'N/A'}</td>
+                    <td>${item.email || item.correo || 'N/A'}</td>
                     <td>${item.telefono || 'N/A'}</td>
                     <td>${formatDate(item.timestamp)}</td>
                     <td>
@@ -483,7 +483,7 @@
                     <div class="col-md-6">
                         <h6 class="fw-bold"><i class="fas fa-user me-2"></i>Información Personal</h6>
                         <p><strong>Nombre:</strong> ${item.nombre || 'N/A'}</p>
-                        <p><strong>Email:</strong> ${item.correo || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${item.email || item.correo || 'N/A'}</p>
                         <p><strong>Teléfono:</strong> ${item.telefono || 'N/A'}</p>
                         ${item.genero ? `<p><strong>Género:</strong> ${item.genero}</p>` : ''}
                     </div>
@@ -526,7 +526,23 @@
                 const item = allData.find(data => data.id === id);
                 if (!item) return;
 
-                await formManagerV2.updateRecordStatus(item.type, id, status);
+                // Actualizar directamente en localStorage
+                const storageKey = 'terapias_bogota_data';
+                const existingData = JSON.parse(localStorage.getItem(storageKey) || '{}');
+                
+                if (item.type === 'cita') {
+                    const citaIndex = existingData.citas.findIndex(c => c.id === id);
+                    if (citaIndex !== -1) {
+                        existingData.citas[citaIndex].status = status;
+                    }
+                } else if (item.type === 'contacto') {
+                    const contactoIndex = existingData.contactos.findIndex(c => c.id === id);
+                    if (contactoIndex !== -1) {
+                        existingData.contactos[contactoIndex].status = status;
+                    }
+                }
+                
+                localStorage.setItem(storageKey, JSON.stringify(existingData));
                 
                 showNotification(`Estado actualizado a "${status}"`, 'success');
                 loadData();
@@ -541,7 +557,18 @@
             if (!confirm('¿Estás seguro de que quieres eliminar este registro?')) return;
 
             try {
-                await formManagerV2.deleteRecord(type, id);
+                // Eliminar directamente de localStorage
+                const storageKey = 'terapias_bogota_data';
+                const existingData = JSON.parse(localStorage.getItem(storageKey) || '{}');
+                
+                if (type === 'cita') {
+                    existingData.citas = existingData.citas.filter(c => c.id !== id);
+                } else if (type === 'contacto') {
+                    existingData.contactos = existingData.contactos.filter(c => c.id !== id);
+                }
+                
+                localStorage.setItem(storageKey, JSON.stringify(existingData));
+                
                 showNotification('Registro eliminado correctamente', 'success');
                 loadData();
             } catch (error) {
@@ -553,7 +580,56 @@
         // Exportar datos
         async function exportData(type) {
             try {
-                await formManagerV2.exportToCSV(type);
+                const storageKey = 'terapias_bogota_data';
+                const existingData = JSON.parse(localStorage.getItem(storageKey) || '{}');
+                
+                let dataToExport = [];
+                let filename = '';
+                
+                if (type === 'citas') {
+                    dataToExport = existingData.citas || [];
+                    filename = 'citas_terapias_bogota.csv';
+                } else if (type === 'contactos') {
+                    dataToExport = existingData.contactos || [];
+                    filename = 'contactos_terapias_bogota.csv';
+                } else {
+                    dataToExport = [...(existingData.citas || []), ...(existingData.contactos || [])];
+                    filename = 'todos_los_registros_terapias_bogota.csv';
+                }
+                
+                if (dataToExport.length === 0) {
+                    showNotification('No hay datos para exportar', 'warning');
+                    return;
+                }
+                
+                // Crear CSV
+                const headers = Object.keys(dataToExport[0]);
+                const csvContent = [
+                    headers.join(','),
+                    ...dataToExport.map(row => headers.map(header => {
+                        const value = row[header] || '';
+                        // Escapar comillas y envolver en comillas si contiene comas
+                        const stringValue = String(value);
+                        if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
+                            return `"${stringValue.replace(/"/g, '""')}"`;
+                        }
+                        return stringValue;
+                    }).join(','))
+                ].join('\n');
+                
+                // Descargar archivo
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                showNotification('Datos exportados exitosamente', 'success');
             } catch (error) {
                 console.error('Error al exportar datos:', error);
                 showNotification('Error al exportar datos', 'error');
@@ -588,7 +664,7 @@
 
         // Actualizar fuente de datos
         function updateDataSource() {
-            const dataSource = formManagerV2.useFirebase ? 'Firebase' : 'Local';
+            const dataSource = 'Local (localStorage)';
             document.getElementById('data-source').textContent = dataSource;
         }
 
