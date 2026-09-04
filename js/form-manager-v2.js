@@ -30,10 +30,16 @@ class FormManagerV2 {
     // Configurar un formulario específico
     setupForm(formId, type) {
         const form = document.getElementById(formId);
-        if (!form) return;
+        if (!form) {
+            console.warn(`⚠️ Formulario no encontrado: ${formId}`);
+            return;
+        }
+
+        console.log(`✅ Formulario configurado: ${formId} (${type})`);
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            console.log(`📝 Formulario enviado: ${formId}`);
             this.handleFormSubmit(form, type);
         });
     }
@@ -41,19 +47,25 @@ class FormManagerV2 {
     // Manejar envío de formulario
     async handleFormSubmit(form, type) {
         try {
+            console.log(`🚀 Procesando formulario: ${type}`);
+            
             // Validar formulario
             if (!this.validateForm(form)) {
+                console.warn('❌ Validación fallida');
                 this.showNotification('Por favor completa todos los campos requeridos', 'error');
                 return;
             }
 
             // Recopilar datos del formulario
             const formData = this.collectFormData(form, type);
+            console.log('📊 Datos recopilados:', formData);
             
             // Guardar datos
             if (this.useFirebase) {
+                console.log('💾 Guardando en Firebase...');
                 await this.saveToFirebase(formData, type);
             } else {
+                console.log('💾 Guardando en localStorage...');
                 this.saveToLocalStorage(formData, type);
             }
 
@@ -67,7 +79,7 @@ class FormManagerV2 {
             this.setupDateInputs();
 
         } catch (error) {
-            console.error('Error al procesar formulario:', error);
+            console.error('❌ Error al procesar formulario:', error);
             this.showNotification('Error al enviar el formulario. Por favor intenta nuevamente.', 'error');
         }
     }
@@ -146,7 +158,10 @@ class FormManagerV2 {
     // Guardar en localStorage (fallback)
     saveToLocalStorage(data, type) {
         try {
+            console.log(`💾 Guardando en localStorage (${type}):`, data);
+            
             const existingData = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+            console.log('📊 Datos existentes:', existingData);
             
             if (!existingData[type]) {
                 existingData[type] = [];
@@ -156,8 +171,12 @@ class FormManagerV2 {
             localStorage.setItem(this.storageKey, JSON.stringify(existingData));
             
             console.log('✅ Datos guardados en localStorage:', data.id);
+            console.log('📊 Total registros:', {
+                citas: existingData.citas?.length || 0,
+                contactos: existingData.contactos?.length || 0
+            });
         } catch (error) {
-            console.error('Error al guardar en localStorage:', error);
+            console.error('❌ Error al guardar en localStorage:', error);
             throw error;
         }
     }
@@ -205,12 +224,18 @@ class FormManagerV2 {
     getDataFromLocalStorage() {
         try {
             const data = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+            console.log('📊 Datos obtenidos de localStorage:', {
+                citas: data.citas?.length || 0,
+                contactos: data.contactos?.length || 0,
+                total: (data.citas?.length || 0) + (data.contactos?.length || 0)
+            });
+            
             return {
                 citas: data.citas || [],
                 contactos: data.contactos || []
             };
         } catch (error) {
-            console.error('Error al obtener datos de localStorage:', error);
+            console.error('❌ Error al obtener datos de localStorage:', error);
             return { citas: [], contactos: [] };
         }
     }
@@ -340,6 +365,13 @@ class FormManagerV2 {
 
 // Instancia global
 const formManagerV2 = new FormManagerV2();
+
+// Verificar inicialización
+console.log('🔍 FormManagerV2 inicializado:', {
+    storageKey: formManagerV2.storageKey,
+    useFirebase: formManagerV2.useFirebase,
+    formsConfigured: ['index-form', 'appointment-form', 'contact-form']
+});
 
 // Exportar para uso global
 window.formManagerV2 = formManagerV2;
